@@ -29,7 +29,7 @@ function deleteItem(state, item) {
 var renderList = function (state, element) {
 	var itemsHTML = state.items.map(function(item) {
 		return '<li>' +
-		'<span>' + item + '</span>' + 
+		'<span class="shopping-item">' + item + '</span>' + 
 		'<div class="shopping-item-controls">' +
           '<button class="shopping-item-toggle">' +
             '<span class="button-label">check</span>' +
@@ -44,7 +44,7 @@ var renderList = function (state, element) {
 }
 
 function toggleItem(item) {
-	$('.shopping-item').toggleClass('shopping-item__checked');
+	item.toggleClass('shopping-item__checked');
 }
 
 
@@ -64,7 +64,7 @@ function handleItemAdds(){
 function handleItemDeletes(){
 	$('.shopping-list').on('click', '.shopping-item-delete', function(event){
 		console.log('click is working');
-		var toDelete = $(this).closest('span').text();
+		var toDelete = $(this).closest('li').find('.shopping-item').text();
 		console.log(toDelete);
 		deleteItem(state, toDelete);
 		renderList(state, $('.shopping-list'));
@@ -76,7 +76,7 @@ function handleItemDeletes(){
 
 function handleItemChecks(){
 	$('.shopping-list').on('click', '.shopping-item-toggle', function(event){
-		var toToggle = $(this).closest('span');
+		var toToggle = $(this).closest('li').find('span.shopping-item');
 		console.log(toToggle);
 		toggleItem(toToggle);
 	});
